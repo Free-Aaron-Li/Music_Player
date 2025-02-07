@@ -7,8 +7,8 @@ import QtQuick.Layouts
 /// 1. 标题栏
 Rectangle {
     id: title_bar
-
-    color: "#FAF2F1"
+    property var theme: themes.default_theme[themes.current]
+    color: theme.title_background_color
     /// 获取鼠标事件
     MouseArea {
         property var click_pos: Qt.point(0, 0)
@@ -57,7 +57,7 @@ Rectangle {
                     ColorOverlay {
                         anchors.fill: parent
                         source: parent
-                        color: "#572920"
+                        color: theme.title_logo_color
                     }
                 }
                 Text {
@@ -66,7 +66,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("Music Player")
                     /// 更改文本颜色
-                    color: "#572920"
+                    color: theme.title_font_color
                 }
                 /// 处理组件宽度
                 Component.onCompleted: {
@@ -94,16 +94,16 @@ Rectangle {
 
                     /// 圆形阴影
                     radius: 100
-                    color: if (is_hovered) return "#1F572920"
-                    else return "#00000000"
+                    color: if (is_hovered) return theme.title_cursor_hovered_button_shadow_color
+                    else return theme.title_cursor_leave_button_color
 
                     /// 绘制图标
                     Rectangle {
                         width: parent.width - 10
                         height: 2
                         anchors.centerIn: parent
-                        border.color: "#572920"
-                        color: "#00000000"
+                        border.color: theme.title_button_minimize_color
+                        color: theme.title_cursor_leave_button_color
                     }
 
                     /// 鼠标事件判断
@@ -128,8 +128,8 @@ Rectangle {
                     width: 30
                     height: width
                     radius: 100
-                    color: if (is_hovered) return "#1F572920"
-                    else return "#00000000"
+                    color: if (is_hovered) return theme.title_cursor_hovered_button_shadow_color
+                    else return theme.title_cursor_leave_button_color
 
                     /// 绘制图标
                     Rectangle {
@@ -138,8 +138,8 @@ Rectangle {
                         anchors.centerIn: parent
                         radius: 100
                         border.width: 2
-                        border.color: "#572920"
-                        color: "#00000000"
+                        border.color: theme.title_button_maximize_restore_color
+                        color: theme.title_cursor_leave_button_color
                     }
 
                     /// 鼠标事件判断
@@ -168,8 +168,8 @@ Rectangle {
                     width: 30
                     height: width
                     radius: 100
-                    color: if (is_hovered) return "#1F572920"
-                    else return "#00000000"
+                    color: if (is_hovered) return theme.title_cursor_hovered_button_shadow_color
+                    else return theme.title_cursor_leave_button_color
 
                     /// 绘制图标
                     Rectangle {
@@ -177,16 +177,16 @@ Rectangle {
                         height: 2
                         anchors.centerIn: parent
                         rotation: 45
-                        border.color: "#572920"
-                        color: "#00000000"
+                        border.color: theme.title_button_close_color
+                        color: theme.title_cursor_leave_button_color
                     }
                     Rectangle {
                         width: parent.width - 10
                         height: 2
                         anchors.centerIn: parent
                         rotation: -45
-                        border.color: "#572920"
-                        color: "#00000000"
+                        border.color: theme.title_button_close_color
+                        color: theme.title_cursor_leave_button_color
                     }
 
                     /// 鼠标事件判断

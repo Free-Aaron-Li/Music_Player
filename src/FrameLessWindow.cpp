@@ -95,57 +95,59 @@ void FrameLessWindow::SetCursorIcon() {
 }
 void FrameLessWindow::SetWindowGeometry(const QPointF &pos) {
     /// 偏移量
-    const auto off_set = this->start_position_ - pos;
-    if (off_set.x() == 0 && off_set.y() == 0)
+    const auto offset = this->start_position_ - pos;
+    if (offset.x() == 0 && offset.y() == 0)
         return;
     /// 依据偏移量创建新窗口
+    /// @param size 窗口新大小
+    /// @param position 窗口新位置
     static auto SetGeometryFunction = [this](const QSize &size, const QPointF &position) {
-        auto t_pos = this->old_position_;
-        QSize t_size = minimumSize();
+        auto temp_pos = this->old_position_;
+        auto temp_size = minimumSize();
         if (size.width() > minimumWidth()) {
-            t_pos.setX(position.x());
-            t_size.setWidth(size.width());
+            temp_pos.setX(position.x());
+            temp_size.setWidth(size.width());
         } else if (this->mouse_position_ == LEFT) { /// 不允许向左扩展窗口
-            t_pos.setX(this->old_position_.x() + this->old_size_.width() - minimumWidth());
+            temp_pos.setX(this->old_position_.x() + this->old_size_.width() - minimumWidth());
         }
         if (size.height() > minimumHeight()) {
-            t_pos.setY(position.y());
-            t_size.setHeight(size.height());
+            temp_pos.setY(position.y());
+            temp_size.setHeight(size.height());
         } else if (this->mouse_position_ == LEFT) {
-            t_pos.setY(this->old_position_.y() + this->old_size_.height() - minimumHeight());
+            temp_pos.setY(this->old_position_.y() + this->old_size_.height() - minimumHeight());
         }
         /// 创建指定大小窗口
-        this->setGeometry(t_pos.x(), t_pos.y(), t_size.width(), t_size.height());
+        this->setGeometry(temp_pos.x(), temp_pos.y(), temp_size.width(), temp_size.height());
         this->update();
     };
     switch (this->mouse_position_) {
         case TOPLEFT:
             /// 拖动后大小==原大小+偏移量，
             /// 坐标==y原坐标-偏移量
-            SetGeometryFunction(this->old_size_ + QSize(off_set.x(), off_set.y()), this->old_position_ - off_set);
+            SetGeometryFunction(this->old_size_ + QSize(offset.x(), offset.y()), this->old_position_ - offset);
             break;
         case TOP:
-            SetGeometryFunction(this->old_size_ + QSize(0, off_set.y()), this->old_position_ - QPointF(0, off_set.y()));
+            SetGeometryFunction(this->old_size_ + QSize(0, offset.y()), this->old_position_ - QPointF(0, offset.y()));
             break;
         case TOPRIGHT:
-            SetGeometryFunction(this->old_size_ - QSize(off_set.x(), -off_set.y()),
-                                this->old_position_ - QPointF(0, off_set.y()));
+            SetGeometryFunction(this->old_size_ - QSize(offset.x(), -offset.y()),
+                                this->old_position_ - QPointF(0, offset.y()));
             break;
         case LEFT:
-            SetGeometryFunction(this->old_size_ + QSize(off_set.x(), 0), this->old_position_ - QPointF(off_set.x(), 0));
+            SetGeometryFunction(this->old_size_ + QSize(offset.x(), 0), this->old_position_ - QPointF(offset.x(), 0));
             break;
         case RIGHT:
-            SetGeometryFunction(this->old_size_ - QSize(off_set.x(), 0), this->position());
+            SetGeometryFunction(this->old_size_ - QSize(offset.x(), 0), this->position());
             break;
         case BOTTOMLEFT:
-            SetGeometryFunction(this->old_size_ + QSize(off_set.x(), -off_set.y()),
-                                this->old_position_ - QPointF(off_set.x(), 0));
+            SetGeometryFunction(this->old_size_ + QSize(offset.x(), -offset.y()),
+                                this->old_position_ - QPointF(offset.x(), 0));
             break;
         case BOTTOM:
-            SetGeometryFunction(this->old_size_ + QSize(0, -off_set.y()), this->position());
+            SetGeometryFunction(this->old_size_ + QSize(0, -offset.y()), this->position());
             break;
         case BOTTOMRIGHT:
-            SetGeometryFunction(this->old_size_ - QSize(off_set.x(), off_set.y()), this->position());
+            SetGeometryFunction(this->old_size_ - QSize(offset.x(), offset.y()), this->position());
             break;
         default:
             break;
