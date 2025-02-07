@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Qmain_interface_bottom_bar.qml</file>
+        <file>Qmain_interface_title_bar.qml</file>
+        <file>Qmain_interface_content_left.qml</file>
+        <file>Qmain_interface_content_right.qml</file>
+    </qresource>
+</RCC>
