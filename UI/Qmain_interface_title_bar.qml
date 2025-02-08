@@ -52,7 +52,7 @@ Rectangle {
                     width: 40
                     height: width
                     anchors.verticalCenter: parent.verticalCenter /// 居中显示
-                    source: "qrc:/asset/images/music163.svg"
+                    source: theme.title_logo_dir
                     /// 更改Logo颜色
                     ColorOverlay {
                         anchors.fill: parent
@@ -75,14 +75,14 @@ Rectangle {
                 }
             }
             /// 占位组件，将按钮挤压到右方
-            Item{
+            Item {
                 Layout.preferredWidth: 10
                 Layout.fillWidth: true
             }
 
             /// 右侧窗口控制按钮区
             Row {
-                width: 30*3 + 5*3
+                width: 30 * 3 + 5 * 3
                 spacing: 5
                 /// 1. 缩小图标
                 Rectangle {

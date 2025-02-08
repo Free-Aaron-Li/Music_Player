@@ -30,17 +30,38 @@ FrameLessWindow {
         /// 默认主题
         property var default_theme: [
             {
-                name:"pink",
-                /// title
+                name: "pink",
+                ///
+                /// 1. Color
+                ///
+                /// 1.1 title
                 title_background_color: "#FAF2F1",
-                title_logo_color:"#572920",
-                title_font_color:"#572920",
+                title_logo_color: "#572920",
+                title_font_color: "#572920",
                 title_button_minimize_color: "#572920",
                 title_button_maximize_restore_color: "#572920",
                 title_button_close_color: "#572920",
-                title_cursor_hovered_button_shadow_color:"#1F572920",
+                title_cursor_hovered_button_shadow_color: "#1F572920",
                 title_cursor_leave_button_color: "#00000000",
-                type:"default",
+                /// 2.2 left content
+                left_content_background_color: "#FAF2F1",
+                left_content_sub_background_color: "FF5966",
+                left_content_font_color: "#572920",
+                left_content_cursor_leave_button_color: "#00000000",
+
+                ///
+                /// 2. Icon
+                ///
+                /// 2.1 title
+                title_logo_dir: "qrc:/images/music163.svg",
+                /// 2.2 left content
+                left_content_discover_music_icon_dir: "qrc:/images/discoverMusic.svg",
+                left_content_my_attention_icon_dir: "qrc:/images/myAttention.svg",
+                left_content_fm_icon_dir: "qrc:/images/preFM.svg",
+                left_content_my_favorite_icon_dir: "qrc:/images/myFavorite.svg",
+                left_content_my_collection_icon_dir: "qrc:/images/bookmark.svg",
+                left_content_local_icon_dir: "qrc:/images/download.svg",
+                type: "default",
             },
         ]
 
@@ -48,7 +69,6 @@ FrameLessWindow {
 
     Column {
         anchors.fill: parent
-
         /// 1. 标题部分
         Qmain_interface_title_bar {
             id: title_bar
@@ -67,10 +87,9 @@ FrameLessWindow {
                 /// 2.1 左侧主体部分
                 Qmain_interface_content_left {
                     id: left_content
-                    width: 180
-                    height: parent.heigh
+                    width: 200
+                    height: parent.height
                 }
-
                 /// 2.2 右侧主体部分
                 Qmain_interface_content_right {
                     id: right_content
