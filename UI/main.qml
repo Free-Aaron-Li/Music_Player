@@ -31,9 +31,9 @@ FrameLessWindow {
         property var default_theme: [
             {
                 name: "pink",
-                ///
-                /// 1. Color
-                ///
+                /**
+                 * 1. Color
+                 */
                 /// 1.1 title
                 title_background_color: "#FAF2F1",
                 title_logo_color: "#572920",
@@ -43,15 +43,20 @@ FrameLessWindow {
                 title_button_close_color: "#572920",
                 title_cursor_hovered_button_shadow_color: "#1F572920",
                 title_cursor_leave_button_color: "#00000000",
-                /// 2.2 left content
+                /// 1.2 left content
                 left_content_background_color: "#FAF2F1",
                 left_content_sub_background_color: "FF5966",
                 left_content_font_color: "#572920",
                 left_content_cursor_leave_button_color: "#00000000",
+                /// 1.3 bottom bar
+                bottom_bar_font_color: "#572920",
+                bottom_bar_background_color: "#FAF2F1",
+                bottom_bar_sub_background_color: "FF5966",
+                bottom_bar_cursor_leave_button_color: "#00000000",
 
-                ///
-                /// 2. Icon
-                ///
+                /**
+                 * 2. Icon
+                 */
                 /// 2.1 title
                 title_logo_dir: "qrc:/images/music163.svg",
                 /// 2.2 left content
@@ -61,6 +66,22 @@ FrameLessWindow {
                 left_content_my_favorite_icon_dir: "qrc:/images/myFavorite.svg",
                 left_content_my_collection_icon_dir: "qrc:/images/bookmark.svg",
                 left_content_local_icon_dir: "qrc:/images/download.svg",
+                /// 2.3 bottom bar
+                bottom_bar_music_cover_image_dir: "qrc:/images/QingQueQ.png",
+                bottom_bar_player_icon_dir: "qrc:/images/player.svg",
+                bottom_bar_repeat_single_play_icon_dir: "qrc:/images/repeatSinglePlay.svg",
+                bottom_bar_pre_play_icon_dir: "qrc:/images/prePlayer.svg",
+                bottom_bar_player_volume_dir: "qrc:/images/volume.svg",
+                bottom_bar_play_list_dir: "qrc:/images/playList.svg",
+
+                /**
+                 * 3. font
+                 */
+                /// 3.1 left content
+                left_content_font_size: 11,
+                /// 3.2 bottom bar
+                bottom_bar_font_size: 11,
+
                 type: "default",
             },
         ]

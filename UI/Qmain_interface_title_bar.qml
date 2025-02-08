@@ -4,7 +4,9 @@ import qc.window
 import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
 
-/// 1. 标题栏
+/**
+ * 主页——标题栏
+ */
 Rectangle {
     id: title_bar
     property var theme: themes.default_theme[themes.current]

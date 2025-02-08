@@ -1,9 +1,12 @@
 import QtQuick 2.15
 
-/// 左侧主体部分
+/**
+ * 主页——左侧主体部分
+ */
 Rectangle {
     id: left_content
     property var theme: themes.default_theme[themes.current]
+    /// 按钮元素数组
     /// 侧边栏由多个区块组成，如：发现、关注、我喜欢、最近播放
     property var left_content_parts: [
         {
@@ -77,7 +80,6 @@ Rectangle {
     property string this_button_text: "发现"
     property int count: this_data.length
     property int button_height: 40
-    property int font_size: 11
 
 
     Flickable {
@@ -118,7 +120,7 @@ Rectangle {
                     height: text === "" ? 0 : contentHeight + 5
                     anchors.left: parent.left
                     anchors.leftMargin: 10
-                    font.pointSize: left_content.font_size - 2
+                    font.pointSize: theme.left_content_font_size - 2
                     text: left_content.this_data[index].header_text
                     color: theme.left_content_font_color
                 }
@@ -167,7 +169,7 @@ Rectangle {
                     }
                     Text {
                         font.bold: is_this_button ? true : false
-                        font.pointSize: left_content.font_size
+                        font.pointSize: theme.left_content_font_size
                         scale: is_this_button ? 1.1 : 1
                         text: button_text
                         color: theme.left_content_font_color

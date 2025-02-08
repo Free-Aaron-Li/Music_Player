@@ -5,5 +5,8 @@
         <file>Qmain_interface_title_bar.qml</file>
         <file>Qmain_interface_content_left.qml</file>
         <file>Qmain_interface_content_right.qml</file>
+        <file>Qimage_color_mask.qml</file>
+        <file>Qtool_tip_button.qml</file>
+        <file>Qimage_round_corner.qml</file>
     </qresource>
 </RCC>
