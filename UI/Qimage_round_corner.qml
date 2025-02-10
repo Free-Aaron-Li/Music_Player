@@ -6,6 +6,7 @@ import Qt5Compat.GraphicalEffects
  * 用于：设置底部栏音乐封面
  */
 Item {
+    id: image_round_corner
     property alias fillMode: img.fillMode
     property string source: ""
     property double radius: 10

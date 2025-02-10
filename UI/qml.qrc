@@ -11,5 +11,6 @@
         <file>find_music/Qpage_find_music.qml</file>
         <file>find_music/Qpage_find_music_latest_music_content.qml</file>
         <file>find_music/Qpage_find_music_play_list_content.qml</file>
+        <file>Qresource_music.qml</file>
     </qresource>
 </RCC>

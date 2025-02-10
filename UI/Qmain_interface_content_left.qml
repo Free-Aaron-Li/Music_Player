@@ -146,6 +146,13 @@ Rectangle {
                 } else {
                     return theme.left_content_cursor_leave_button_color;
                 }
+
+                onParentChanged: {
+                    if (parent != null) {
+                        anchors.horizontalCenter = parent.horizontalCenter;
+                    }
+                }
+
                 Rectangle {
                     /// 按钮被选中背景效果
                     width: parent.is_this_button ? parent.width : 0

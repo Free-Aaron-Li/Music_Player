@@ -54,6 +54,9 @@ FrameLessWindow {
                 page_find_music_header_font_color: "#572920",
                 page_find_music_header_sub_background_color: "FF5966",
                 page_find_music_header_cursor_leave_button_color: "#00000000",
+                page_find_music_latest_music_title_color: "#C3C3C3",
+                page_find_music_latest_music_content_font_color: "#572920",
+                page_find_music_sub_color: "#FAF7F6",
 
                 /**
                  * 2. Icon
@@ -85,11 +88,13 @@ FrameLessWindow {
                 /// 3.3. find music page
                 page_find_music_font_size: 11,
                 page_find_music_header_font_size: 11,
-
-                type: "default",
+                page_find_music_latest_music_font_size: 11,
+                type: "default"
             },
         ]
-
+    }
+    Qresource_music {
+        id: resource_music
     }
 
     Column {
@@ -122,7 +127,6 @@ FrameLessWindow {
                     height: parent.height
                     this_qml: left_content.this_qml
                 }
-
             }
         }
 

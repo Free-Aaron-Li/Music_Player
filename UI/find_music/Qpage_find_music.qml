@@ -28,6 +28,9 @@ Flickable {
 
     property double font_size: theme.page_find_music_font_size
     anchors.fill: parent
+    contentWidth: parent.width
+    contentHeight: find_music_header.height + find_music_content.height + 30
+    clip: true
 
     /// 1. 头部
     Rectangle {
@@ -101,22 +104,19 @@ Flickable {
     }
 
     /// 2. 主体
-    Item {
+    Loader {
         id: find_music_content
         /// 组件加载方式实现
-        width: parent.width * .85
+        width: parent.width
+        height: item ? item.contentHeight : 0
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: find_music_header.bottom
         anchors.topMargin: 25
-
-        Loader {
-            source: find_music_page_flickable.header_data[find_music_header.current].qml
-            onStatusChanged: {
-                if(status === Loader.Ready) {
-                    item.parent = find_music_content
-                    console.log("加载内容："+source)
-                }
-            }
-        }
+        source: find_music_page_flickable.header_data[find_music_header.current].qml
+        // onStatusChanged: {
+        //     if (status === Loader.Ready) {
+        //         console.log("加载内容：" + source);
+        //     }
+        // }
     }
 }
