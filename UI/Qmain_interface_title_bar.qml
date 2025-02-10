@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import qc.window
+import qcpp.window
 import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
 

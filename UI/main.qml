@@ -1,9 +1,6 @@
 import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Layouts
-import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
-import qc.window
+import qcpp.window 1.0
 
 FrameLessWindow {
     id: frame_less_window
@@ -53,6 +50,10 @@ FrameLessWindow {
                 bottom_bar_background_color: "#FAF2F1",
                 bottom_bar_sub_background_color: "FF5966",
                 bottom_bar_cursor_leave_button_color: "#00000000",
+                /// 1.4 find music page
+                page_find_music_header_font_color: "#572920",
+                page_find_music_header_sub_background_color: "FF5966",
+                page_find_music_header_cursor_leave_button_color: "#00000000",
 
                 /**
                  * 2. Icon
@@ -81,6 +82,9 @@ FrameLessWindow {
                 left_content_font_size: 11,
                 /// 3.2 bottom bar
                 bottom_bar_font_size: 11,
+                /// 3.3. find music page
+                page_find_music_font_size: 11,
+                page_find_music_header_font_size: 11,
 
                 type: "default",
             },
@@ -116,6 +120,7 @@ FrameLessWindow {
                     id: right_content
                     width: parent.width - left_content.width
                     height: parent.height
+                    this_qml: left_content.this_qml
                 }
 
             }

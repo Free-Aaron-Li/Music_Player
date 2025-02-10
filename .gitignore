@@ -1,5 +1,6 @@
 # all
 /**/.idea/
+/**/.vscode/
 /**/bin/
 /**/.fleet/
 /**/.cache/

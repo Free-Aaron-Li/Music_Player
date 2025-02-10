@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 /**
- * 工具组件——带有默认鼠标效果的按钮
+ * 工具——带有默认鼠标效果的按钮
  */
 MouseArea {
     property string color: ""

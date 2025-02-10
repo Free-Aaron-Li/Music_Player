@@ -15,20 +15,21 @@ Rectangle {
                 {
                     button_text: "发现",
                     button_icon: theme.left_content_discover_music_icon_dir,
-                    qml: "", /// 跳转文件
-                    is_active: true, /// 是否显示
+                    qml: "find_music/Qpage_find_music.qml" /// 发现音乐板块
+                    ,
+                    is_active: true /// 是否显示
                 },
                 {
                     button_text: "关注",
                     button_icon: theme.left_content_my_attention_icon_dir,
                     qml: "",
-                    is_active: true,
+                    is_active: true
                 },
                 {
                     button_text: "FM",
                     button_icon: theme.left_content_fm_icon_dir,
                     qml: "",
-                    is_active: true,
+                    is_active: true
                 }
             ],
             is_active: true
@@ -39,20 +40,21 @@ Rectangle {
                 {
                     button_text: "喜欢",
                     button_icon: theme.left_content_my_favorite_icon_dir,
-                    qml: "", /// 跳转文件
-                    is_active: true, /// 是否显示
+                    qml: "" /// 跳转文件
+                    ,
+                    is_active: true /// 是否显示
                 },
                 {
                     button_text: "收藏",
                     button_icon: theme.left_content_my_collection_icon_dir,
                     qml: "",
-                    is_active: true,
+                    is_active: true
                 },
                 {
                     button_text: "本地",
                     button_icon: theme.left_content_local_icon_dir,
                     qml: "",
-                    is_active: true,
+                    is_active: true
                 }
             ],
             is_active: true
@@ -65,22 +67,22 @@ Rectangle {
             if (item.is_active) {
                 let filtered_button_data = item.button_data.filter(button => button.is_active);
                 return {
-                    header_text: item.header_text, button_data: filtered_button_data
+                    header_text: item.header_text,
+                    button_data: filtered_button_data
                 };
             }
             return null;
         }).filter(item => item !== null);
-        return filtered_data
+        return filtered_data;
     }
 
     color: theme.left_content_background_color
     ///property var this_data: left_content_parts
     property var this_data: filter_left_content_parts(left_content_parts)
-    property string this_qml: ""
+    property string this_qml: "find_music/Qpage_find_music.qml"
     property string this_button_text: "发现"
     property int count: this_data.length
     property int button_height: 40
-
 
     Flickable {
         id: left_content_flickable
@@ -95,15 +97,15 @@ Rectangle {
                 property int all_height: 0
                 model: left_content.count
                 delegate: left_content_repeater_delegate
-                onCountChanged: { /// 内容总高度
+                onCountChanged: {
+                    /// 内容总高度
                     var h = 0;
                     for (var i = 0; i < count; ++i) {
-                        h += itemAt(i).height
+                        h += itemAt(i).height;
                     }
-                    h = all_height + parent.spacing * count
+                    h = all_height + parent.spacing * count;
                 }
             }
-
         }
         Component {
             id: left_content_repeater_delegate
@@ -113,9 +115,9 @@ Rectangle {
                 height: left_content.button_height * count
                 spacing: 4
                 interactive: false /// 禁止拖曳
-                model: ListModel {
-                }
-                header: Text { /// 侧边栏分区标题
+                model: ListModel {}
+                header: Text {
+                    /// 侧边栏分区标题
                     width: parent.width
                     height: text === "" ? 0 : contentHeight + 5
                     anchors.left: parent.left
@@ -125,8 +127,9 @@ Rectangle {
                     color: theme.left_content_font_color
                 }
                 delegate: left_content_list_view_delegate
-                Component.onCompleted: { /// 组件创建完成后，添加数据
-                    model.append(left_content.this_data[index].button_data)
+                Component.onCompleted: {
+                    /// 组件创建完成后，添加数据
+                    model.append(left_content.this_data[index].button_data);
                 }
             }
         }
@@ -139,11 +142,12 @@ Rectangle {
                 height: left_content.button_height - 6 /// 彼此区块间间隔
                 radius: 50
                 color: if (is_hovered) {
-                    return "#1F" + theme.left_content_sub_background_color
+                    return "#1F" + theme.left_content_sub_background_color;
                 } else {
-                    return theme.left_content_cursor_leave_button_color
+                    return theme.left_content_cursor_leave_button_color;
                 }
-                Rectangle { /// 按钮被选中背景效果
+                Rectangle {
+                    /// 按钮被选中背景效果
                     width: parent.is_this_button ? parent.width : 0
                     height: parent.height
                     radius: parent.radius
@@ -186,14 +190,14 @@ Rectangle {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
-                        left_content.this_button_text = button_text
-                        left_content.this_qml = qml
+                        left_content.this_button_text = button_text;
+                        left_content.this_qml = qml;
                     }
                     onEntered: {
-                        parent.is_hovered = true
+                        parent.is_hovered = true;
                     }
                     onExited: {
-                        parent.is_hovered = false
+                        parent.is_hovered = false;
                     }
                 }
             }

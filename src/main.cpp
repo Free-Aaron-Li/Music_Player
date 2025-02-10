@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    /// C++与qml互联
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 
@@ -29,7 +30,7 @@ int main(int argc, char *argv[]) {
     /// 2. 版本号
     /// 3. 小版本
     /// 4. QML端的组件名称
-    qmlRegisterType<FrameLessWindow>("qc.window", 1, 0, "FrameLessWindow");
+    qmlRegisterType<FrameLessWindow>("qcpp.window", 1, 0, "FrameLessWindow");
     QObject::connect(
             &engine, &QQmlApplicationEngine::objectCreated, &app,
             [url](QObject *obj, const QUrl &objUrl) {
