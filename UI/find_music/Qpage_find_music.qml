@@ -4,7 +4,7 @@ import QtQuick 2.15
   * 页面——发现
   */
 Flickable {
-    id: find_music_page_flickable
+    id: find_music_flickable
     property var theme: themes.default_theme[themes.current]
 
     property var header_data: [
@@ -32,6 +32,41 @@ Flickable {
     contentHeight: find_music_header.height + find_music_content.height + 30
     clip: true
 
+    /// 鼠标滚动
+    interactive: false
+    onContentYChanged: {}
+    property int wheel_step: 300
+    PropertyAnimation {
+        id: find_music_flickable_animation
+        target: find_music_flickable
+        property: "contentY"
+        duration: 400
+        easing.type: Easing.InOutQuart
+    }
+    MouseArea {
+        anchors.fill: parent
+        onWheel: function (wheel) {
+            var step = contentY;
+            if (wheel.angleDelta.y > 0) {
+                /// 向上滑动
+                if (contentY - wheel_step < 0) {
+                    step = 0;
+                } else {
+                    step -= wheel_step;
+                }
+            } else if (wheel.angleDelta.y < 0) {
+                /// 向下滑动
+                if (contentY + wheel_step + find_music_flickable.height > find_music_flickable.contentHeight) {
+                    step = find_music_flickable.contentHeight - find_music_flickable.height;
+                } else {
+                    step += wheel_step;
+                }
+            }
+            find_music_flickable_animation.to = step;
+            find_music_flickable_animation.start();
+        }
+    }
+
     /// 1. 头部
     Rectangle {
         id: find_music_header
@@ -49,7 +84,7 @@ Flickable {
                 model: ListModel {}
                 delegate: find_music_header_delegate
                 Component.onCompleted: {
-                    model.append(find_music_page_flickable.header_data);
+                    model.append(find_music_flickable.header_data);
                 }
                 onCountChanged: {
                     /// 头部组件大小
@@ -112,7 +147,7 @@ Flickable {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: find_music_header.bottom
         anchors.topMargin: 25
-        source: find_music_page_flickable.header_data[find_music_header.current].qml
+        source: find_music_flickable.header_data[find_music_header.current].qml
         // onStatusChanged: {
         //     if (status === Loader.Ready) {
         //         console.log("加载内容：" + source);

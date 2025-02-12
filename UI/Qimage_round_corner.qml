@@ -16,8 +16,10 @@ Item {
         anchors.fill: parent
         source: parent.source
         fillMode: Image.PreserveAspectCrop
+        visible: false
     }
-    OpacityMask { /// 蒙版
+    OpacityMask {
+        /// 蒙版
         anchors.fill: parent
         source: img
         maskSource: mask
@@ -29,5 +31,4 @@ Item {
         visible: false
         radius: parent.radius
     }
-
 }

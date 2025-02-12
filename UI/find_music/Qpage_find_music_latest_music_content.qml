@@ -37,6 +37,9 @@ Item {
     property double font_size: theme.page_find_music_latest_music_font_size
     property int header_current: 0
     property int current: -1
+    property int content_item_height: 80
+    property var load_items: []
+    property int start_y: parent.y
     width: parent.width
     height: header.height + content.height + 80
 
@@ -62,6 +65,48 @@ Item {
     }
     Component.onCompleted: {
         setContentModel();
+    }
+
+    /// 根据滑动决定组件是否显示
+    function setContentItemVisible(contentY) {
+        var wheel_step = find_music_flickable.wheel_step;
+        var temp = load_items.slice(0, load_items.length); /// 保存上次加载组件
+        load_items = [];
+        var i = 0;
+
+        /// 仅加载视觉内组件
+        for (i = 0; i < content_repeater.count; ++i) {
+            var start_y = content.start_y + i * latest_music.content_item_height;
+            var end_y = contentY + find_music_flickable.height;
+            if (start_y + wheel_step >= contentY) {
+                if (start_y <= end_y + wheel_step) {
+                    load_items.push(i);
+                } else {
+                    break;
+                }
+            }
+        }
+        for (i = 0; i < load_items.length; ++i) {
+            /// 加载
+            content_repeater.itemAt(load_items[i]).visible = true;
+        }
+        for (i = 0; i < temp.length; ++i) {
+            /// 清理
+            if (load_items.indexOf(temp[i]) === -1) {
+                /// 查找当前加载项是否需要清理
+                if (content_repeater.itemAt(temp[i]) != null) {
+                    content_repeater.itemAt(temp[i]).visible = false;
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: find_music_flickable
+
+        function onContentYChanged() {
+            setContentItemVisible(find_music_flickable.contentY);
+        }
     }
 
     /// 1. 头部
@@ -107,20 +152,26 @@ Item {
     /// 2. 主体
     Rectangle {
         id: content
+        property int start_y: latest_music.start_y + y
         width: parent.width * .9
         height: 0
         anchors.top: header.bottom
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
         radius: 10
-        Column {
-            topPadding: 10
+        Item {
+            width: parent.width - 20
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater {
+                id: content_repeater
                 model: ListModel {
                     id: content_model
                 }
                 delegate: content_delegate
+                onCountChanged: {
+                    /// 初始一次显示
+                    setContentItemVisible(find_music_flickable.contentY);
+                }
             }
         }
         Component {
@@ -129,8 +180,10 @@ Item {
                 /// 委托项单元：图片、音乐人、专辑等
                 property bool is_hovered: false
                 width: content.width - 20 /// 减去内间距
-                height: 80
+                height: latest_music.content_item_height
                 radius: 10
+                visible: false /// 初始不显示
+                y: index * latest_music.content_item_height + 10
                 color: if (latest_music.current === index)
                     return "#2F" + theme.page_find_music_header_sub_background_color
                 else if (is_hovered)
@@ -159,6 +212,7 @@ Item {
                         width: parent.height
                         height: width
                         source: coverImg + "?param=" + width + "y" + height /// 限制图片大小，节约内存
+                        radius: 8
                     }
                     /// 3. 歌名
                     Text {
